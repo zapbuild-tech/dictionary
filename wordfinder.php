@@ -13,7 +13,7 @@ $handle 		=	@fopen("dict-file/".DICTIONARY_FILE_NAME, "r");
 // -- file open and match the word
 if ($handle) {
     while (($buffer = fgets($handle, 4096)) !== false) {
-        if(strlen($buffer) > MINUMUM_CHRACTER_IN_RESULT_WORD ){
+        if(strlen($buffer) > MINIMUM_CHARACTER_IN_RESULT_WORD ){
 			$word = str_split(trim($buffer)); //
 			$result = array_diff($word, $input);
 			if(!$result) $resultArr[]	=	 rtrim($buffer,"\n");
