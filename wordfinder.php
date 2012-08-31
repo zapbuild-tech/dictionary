@@ -5,7 +5,9 @@ if(empty($_POST)){
 include 'configure.php';
 
 //-- the string value to look up the words
-$lookUpString	=	$_POST['lookupfor'];
+$lookUpString		=	$_POST['lookupfor'];
+//-- declare array
+$resultArr		=	array();
                                 
 $input 			=	str_split( $lookUpString ); //user input from the form
 $handle 		=	@fopen("dict-file/".DICTIONARY_FILE_NAME, "r");
