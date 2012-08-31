@@ -16,18 +16,16 @@ $(document).ready(function() {
 			'lookupfor' : {	required : "Please enter some word" , minlength : "Please enter minimum 3 alphabets" , maxlength : "Only <?php echo MAXIMUM_INPUT_CHARACTER_LENGTH;?> maximum characters allowed" ,nospace : "Please enter the word without spaces" }		
 			},
 	});
-	
+
 	$('#wordFinderForm').ajaxForm({  
 		beforeSend:function(){ $('#ResponseWords').html('Please wait..'); },
 		dataType: 'json',
 		async:false,
 		success : function(response) { 
-			
 			//-- remove the loader message
 			$('#ResponseWords').html('');
-			var arr	=	response;
-			var	countElement	=	arr.length;
-			
+			var arr			=	response;
+			var countElement	=	arr.length;
 			//-- if the result has no element put the no result message
 			if(countElement == 0 ){
 				$('#ResponseWords').append('<div>No results found</div>');	
@@ -35,17 +33,11 @@ $(document).ready(function() {
 			//-- to show total results in numbers found
 			var rCount	=	0;
 			$.each(arr, function(key,val) {
-				//-- if the lenght of the result word is less than configure skip the result
-				if(val.length >= '<?php echo MINIMUM_CHARACTER_IN_RESULT_WORD;?>'){
-					$('#ResponseWords').append('<div>'+val+'</div>');	
-					rCount++;
-				}
+				$('#ResponseWords').append('<div>'+val+'</div>');	
+				rCount++;
 			});
 			//-- getting the size if no result is pasted as result was less than configuration settings length
-			var finalSize	=	$('#ResponseWords > div').size();
-			if(finalSize == 0 ){
-				$('#ResponseWords').append('<div>No results found</div>');	
-			}else{
+			if(countElement > 0 ){
 				$('#ResponseWords').prepend('<div><b>Total '+rCount+' results found!</b></div>');	
 			}
 		}
